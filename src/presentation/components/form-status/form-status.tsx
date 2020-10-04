@@ -4,12 +4,12 @@ import Spinner from '@/presentation/components/spinner'
 import Context from '@/presentation/contexts/form/form-context'
 
 const FormStatus: FC = () => {
-  const { state: { isLoading }, errorState: { errorMain } } = useContext(Context)
+  const { state: { isLoading, mainError } } = useContext(Context)
 
   return (
     <div data-testid="error-wrap" className={Styles.errorWrap}>
       {isLoading && <Spinner className={Styles.spinner} />}
-      {errorMain && <span className={Styles.error}>{errorMain}</span>}
+      {mainError && <span className={Styles.error}>{mainError}</span>}
     </div>
   )
 }
