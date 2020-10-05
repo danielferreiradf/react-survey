@@ -4,6 +4,7 @@ import { Footer, Input, LoginHeader, FormStatus } from '@/presentation/component
 import Context from '@/presentation/contexts/form/form-context'
 import { Validation } from '@/presentation/protocols/validation'
 import { Authentication } from '@/domain/usecases'
+import { stat } from 'fs/promises'
 
 type Props = {
   validation: Validation
@@ -34,9 +35,11 @@ const Login: FC<Props> = (props: Props) => {
     event.preventDefault()
 
     setState({ ...state, isLoading: true })
-    if (state.isLoading) {
+
+    if (state.isLoading || state.emailError || state.passwordError) {
       return
     }
+
     await authentication.auth({
       email: state.email,
       password: state.password
@@ -47,7 +50,7 @@ const Login: FC<Props> = (props: Props) => {
     <div className={Styles.login}>
       <LoginHeader />
       <Context.Provider value={ { state, setState } }>
-        <form className={Styles.form} onSubmit={handleSubmit}>
+        <form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
           <h2>Login</h2>
           <Input type="email" name="email" placeholder="Digite seu e-mail" />
           <Input type="password" name="password" placeholder="Digite sua senha" />
