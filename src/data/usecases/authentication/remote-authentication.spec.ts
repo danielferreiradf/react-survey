@@ -58,7 +58,7 @@ describe('Remote Authentication', () => {
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
 
-  test('Should throw invaliedCredentialsError if HttpPostClient returns 500', async () => {
+  test('Should throw invalidCredentialsError if HttpPostClient returns 500', async () => {
     const { sut, httpPostClientSpy } = makeSut()
     httpPostClientSpy.response = { statusCode: HttpStatusCode.serverError }
     const promise = sut.auth(mockAuthentication())
