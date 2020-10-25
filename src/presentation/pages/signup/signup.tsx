@@ -78,7 +78,7 @@ const SignUp: FC<Props> = (props: Props) => {
           <Input type="password" name="password" placeholder="Digite sua senha" />
           <Input type="password" name="passwordConfirmation" placeholder="Repita sua senha" />
           <button data-testid="submit" disabled={checkErrorsToEnableSubmitButton()} type="submit" className={Styles.submit}>Entrar</button>
-          <span className={Styles.link}>Voltar Para Login</span>
+          <Link data-testid="login-link" to="/login" className={Styles.link}>Voltar Para Login</Link>
           <FormStatus />
         </form>
       </Context.Provider>
